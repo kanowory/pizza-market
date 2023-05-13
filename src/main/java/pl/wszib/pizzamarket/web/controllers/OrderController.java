@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.wszib.pizzamarket.services.PizzaService;
+import pl.wszib.pizzamarket.web.models.PizzaModel;
 
 @Controller
 public class OrderController {
@@ -17,7 +18,9 @@ public class OrderController {
 
     @GetMapping("/order/{pizza-id}")
     public String orderForm(@PathVariable(name="pizza-id") Long pizzaId, Model model){
-        pizzaService.getById(pizzaId);
+        PizzaModel pizza = pizzaService.getById(pizzaId);
+        model.addAttribute("pizza", pizza);
+        return "orderPage";
     }
 
 }
